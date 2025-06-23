@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/main.css') }}"
+    />
+  </head>
+  <body>
+    <header class="nav-bar">
+      <nav>
+        <ul class="nav-menu">
+          {% for name, endpoint in menu_items.items() %}
+          <li><a href="{{ url_for(endpoint) }}">{{ name }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>{{ title }}</h2>
+
+      {# Optional: If you want an image at the top of the hobbies page like the about page's photo,
+         uncomment the block below and ensure 'static/img/hobbies_header.jpg' exists. #}
+      {#
+      <div class="about-photo">
+        <img
+          src="{{ url_for('static', filename='img/hobbies_header.jpg') }}"
+          alt="My Hobbies"
+          width="200"
+        />
+      </div>
+      #}
+
+      {% for hobby in hobbies %}
+      <div class="content-box">
+        <div class="hobby-item-content"> {# New wrapper for image and text #}
+          <div class="hobby-image-wrapper">
+            <img
+              src="{{ url_for('static', filename=hobby.image) }}"
+              alt="{{ hobby.name }}"
+            />
+          </div>
+          <div class="hobby-details">
+            <h3>{{ hobby.name }}</h3> {# Using h3 for hobby name #}
+            {# If you add a 'description' key to your hobbies data in __init__.py,
+               uncomment the line below to display it. #}
+            {# {% if hobby.description %}<p>{{ hobby.description }}</p>{% endif %} #}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </main>
+  </body>
+</html>

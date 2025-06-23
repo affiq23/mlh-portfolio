@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/main.css') }}"
+    />
+    <style>
+      /* CSS for responsive map embed */
+      .map-container {
+        position: relative;
+        padding-bottom: 75%; /* 4:3 Aspect Ratio (height:width = 480:640 = 0.75) */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background: #f0f0f0; /* Light grey background while map loads */
+        border-radius: 8px; /* Slightly rounded corners for the map frame */
+      }
+
+      .map-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0; /* Remove default iframe border */
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav-bar">
+      <nav>
+        <ul class="nav-menu">
+          {% for name, endpoint in menu_items.items() %}
+          <li><a href="{{ url_for(endpoint) }}">{{ name }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>{{ title }}</h2>
+      <div class="content-box">
+        <p>Here's a map of some of the places I've been:</p>
+
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/d/u/0/embed?mid=16msEASs8av3SEHRacqbY91h-H7YBKZU&ehbc=2E312F"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #777;">
+            Note: This map highlights some of the cool locations I've had the pleasure of visiting!
+            Create your own map using <a href="https://www.google.com/mymaps" target="_blank" style="color: #1C539F; text-decoration: none;">Google My Maps</a>.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

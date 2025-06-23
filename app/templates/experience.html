@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/main.css') }}"
+    />
+  </head>
+  <body>
+    <header class="nav-bar">
+      <nav>
+        <ul class="nav-menu">
+          {% for name, endpoint in menu_items.items() %}
+          <li><a href="{{ url_for(endpoint) }}">{{ name }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>{{ title }}</h2>
+
+      {# If you want an image at the top of the experience page, uncomment the block below
+         and make sure the image 'static/img/experience_header.jpg' exists. #}
+      {#
+      <div class="about-photo">
+        <img
+          src="{{ url_for('static', filename='img/experience_header.jpg') }}"
+          alt="Work Experience"
+          width="200"
+        />
+      </div>
+      #}
+
+      {% for job in experiences %} {# Corrected: Loop through 'experiences' #}
+      <div class="content-box">
+        <p>
+          <strong>{{ job.title }}</strong> at {{ job.company }} ({{
+          job.date }}) {# Corrected: Using 'date' key #}
+        </p>
+        {% if job.description %} {# Check if description exists #}
+        <ul>
+          {% for point in job.description %}
+          <li>{{ point }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </main>
+  </body>
+</html>
