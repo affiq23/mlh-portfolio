@@ -23,19 +23,9 @@
     <main>
       <h2>{{ title }}</h2>
 
-      {# If you want an image at the top of the experience page, uncomment the block below
-         and make sure the image 'static/img/experience_header.jpg' exists. #}
-      {#
-      <div class="about-photo">
-        <img
-          src="{{ url_for('static', filename='img/experience_header.jpg') }}"
-          alt="Work Experience"
-          width="200"
-        />
-      </div>
-      #}
+     
 
-      {% for job in experiences %} {# Corrected: Loop through 'experiences' #}
+      {% for job in experiences %} 
       <div class="content-box">
         <p>
           <strong>{{ job.title }}</strong> at {{ job.company }} ({{
