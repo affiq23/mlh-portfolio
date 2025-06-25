@@ -29,9 +29,9 @@
       <div class="content-box">
         <p>
           <strong>{{ job.title }}</strong> at {{ job.company }} ({{
-          job.date }}) {# Corrected: Using 'date' key #}
+          job.date }}) 
         </p>
-        {% if job.description %} {# Check if description exists #}
+        {% if job.description %} 
         <ul>
           {% for point in job.description %}
           <li>{{ point }}</li>

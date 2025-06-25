@@ -21,6 +21,7 @@
     <header class="nav-bar">
         <nav>
             <ul class="nav-menu">
+                {% for name, endpoint in menu_items.items() %}
                 <li><a href="{{ url_for(endpoint) }}">{{ name }}</a></li>
                 {% endfor %}
             </ul>
@@ -32,7 +33,7 @@
             <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Profile Picture" />
         </div>
         <h1>{{ title }}</h1>
-       
+
     </main>
 </body>
 

@@ -5,7 +5,6 @@ from flask import Flask, render_template, url_for
 def create_app():
     app = Flask(__name__)
 
-    # Updated Experiences Data
     experiences = [
         {
             "title": "Software Track Lead",
@@ -62,7 +61,7 @@ def create_app():
     @app.route("/about")
     def about():
         about_text = (
-            "Hello, I'm Affiq, a Computer Science student at the University of Texas at Dallas. "
+            "Hi, I'm Affiq, a CS student at the University of Texas at Dallas. "
             "I enjoy coding, playing guitar, and exploring new places."
         )
         return render_template("about.html", title="About Me", about_text=about_text, menu_items=menu_items)

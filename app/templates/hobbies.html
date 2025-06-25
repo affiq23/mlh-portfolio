@@ -23,21 +23,9 @@
     <main>
       <h2>{{ title }}</h2>
 
-      {# Optional: If you want an image at the top of the hobbies page like the about page's photo,
-         uncomment the block below and ensure 'static/img/hobbies_header.jpg' exists. #}
-      {#
-      <div class="about-photo">
-        <img
-          src="{{ url_for('static', filename='img/hobbies_header.jpg') }}"
-          alt="My Hobbies"
-          width="200"
-        />
-      </div>
-      #}
-
       {% for hobby in hobbies %}
       <div class="content-box">
-        <div class="hobby-item-content"> {# New wrapper for image and text #}
+        <div class="hobby-item-content"> 
           <div class="hobby-image-wrapper">
             <img
               src="{{ url_for('static', filename=hobby.image) }}"
@@ -45,9 +33,7 @@
             />
           </div>
           <div class="hobby-details">
-            <h3>{{ hobby.name }}</h3> {# Using h3 for hobby name #}
-            {# If you add a 'description' key to your hobbies data in __init__.py,
-               uncomment the line below to display it. #}
+            <h3>{{ hobby.name }}</h3> 
             {# {% if hobby.description %}<p>{{ hobby.description }}</p>{% endif %} #}
           </div>
         </div>
