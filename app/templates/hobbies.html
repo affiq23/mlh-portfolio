@@ -25,7 +25,7 @@
 
       {% for hobby in hobbies %}
       <div class="content-box">
-        <div class="hobby-item-content"> 
+        <div class="hobby-item-content">
           <div class="hobby-image-wrapper">
             <img
               src="{{ url_for('static', filename=hobby.image) }}"
@@ -33,8 +33,10 @@
             />
           </div>
           <div class="hobby-details">
-            <h3>{{ hobby.name }}</h3> 
-            {# {% if hobby.description %}<p>{{ hobby.description }}</p>{% endif %} #}
+            <h3>{{ hobby.name }}</h3>
+            {% if hobby.description %}
+            <p class="hobby-description">{{ hobby.description }}</p>
+            {% endif %}
           </div>
         </div>
       </div>
