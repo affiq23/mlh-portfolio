@@ -100,6 +100,7 @@ def create_app():
         "Education": "education_view",
         "Hobbies": "hobbies_view",
         "Map": "map_view",
+        "Timeline": "timeline"
     }
 
     @app.route("/")
@@ -147,6 +148,12 @@ def create_app():
     def map_view():
         return render_template(
             "map.html", title="Places I've Visited", menu_items=menu_items
+        )
+    
+    @app.route("/timeline")
+    def timeline():
+        return render_template(
+            'timeline.html', title="Timeline", menu_items=menu_items
         )
 
     @app.route("/api/timeline_post", methods=["POST"])
