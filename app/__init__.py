@@ -11,14 +11,17 @@ from playhouse.shortcuts import model_to_dict
 
 load_dotenv()
 
-# Initialize database connection BEFORE model definition
-mydb = MySQLDatabase(
-    os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306,
-)
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(
+        os.getenv("MYSQL_DATABASE"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306,
+    )
 
 
 class TimelinePost(Model):
@@ -31,8 +34,10 @@ class TimelinePost(Model):
         database = mydb
 
 
-mydb.connect()
-mydb.create_tables([TimelinePost])
+def initialize_db():
+    if mydb.is_closed():
+        mydb.connect()
+    mydb.create_tables([TimelinePost])
 
 
 # Flask app factory
@@ -158,9 +163,17 @@ def create_app():
 
     @app.route("/api/timeline_post", methods=["POST"])
     def post_time_line_post():
-        name = request.form["name"]
-        email = request.form["email"]
-        content = request.form["content"]
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        content = request.form.get("content", "").strip()
+
+        if not name:
+            return "Invalid name", 400
+        if "@" not in email or not email:
+            return "Invalid email", 400
+        if not content:
+            return "Invalid content", 400
+    
         timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
         return model_to_dict(timeline_post)
@@ -183,3 +196,8 @@ def create_app():
         return {"message": f"Post {post_id} deleted successfully"}
 
     return app
+
+if __name__ == "__main__":
+    initialize_db()
+    app = create_app()
+    app.run()
