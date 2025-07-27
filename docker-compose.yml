@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  # Run Service
+  myportfolio:
+    container_name: myportfolio
+    build: .
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - FLASK_ENV=development
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=myportfoliodb
+    ports:
+      - "5001:5000"
+    volumes:
+      - .:/myportfolio
+    depends_on:
+      - mysql
+    command: sh -c "sleep 30 && python app/__init__.py"
+
+  # Run Service
+  mysql:
+    container_name: mysql
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myportfoliodb
+      MYSQL_USER: myportfolio_user
+      MYSQL_PASSWORD: myportfolio_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
