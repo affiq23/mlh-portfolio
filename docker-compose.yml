@@ -6,6 +6,7 @@ services:
     env_file: .env
     environment:
       - FLASK_ENV=development
+      - MYSQL_HOST=mysql
     ports:
       - "5001:5000"
     volumes:
