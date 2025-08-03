@@ -4,25 +4,24 @@ services:
     image: mariadb:latest
     environment:
       MYSQL_DATABASE: portfolio
-      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - mydatabase:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
-
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
   myportfolio:
     build: .
     ports:
       - "5001:5000"
-    environment:
+    environment: 
       FLASK_ENV: production
     depends_on:
       mysql:
         condition: service_healthy
     restart: unless-stopped
-
 volumes:
   mydatabase:
