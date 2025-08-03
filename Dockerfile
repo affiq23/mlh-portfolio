@@ -1,13 +1,13 @@
 FROM python:3.9-slim-buster 
 
-WORKDIR /myportfolio
+COPY requirements.txt /myportfolio/requirements.txt
 
-COPY requirements.txt .
+WORKDIR /myportfolio
 
 RUN pip3 install -r requirements.txt
 
-COPY . .
+COPY . /myportfolio
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["python3", "app/__init__.py"]
 
 EXPOSE 5000

@@ -13,7 +13,7 @@ load_dotenv()
 
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
-    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+    mydb = SqliteDatabase("file:memory?mode=memory&cache=shared", uri=True)
 else:
     mydb = MySQLDatabase(
         os.getenv("MYSQL_DATABASE"),
@@ -105,7 +105,7 @@ def create_app():
         "Education": "education_view",
         "Hobbies": "hobbies_view",
         "Map": "map_view",
-        "Timeline": "timeline"
+        "Timeline": "timeline",
     }
 
     @app.route("/")
@@ -154,12 +154,10 @@ def create_app():
         return render_template(
             "map.html", title="Places I've Visited", menu_items=menu_items
         )
-    
+
     @app.route("/timeline")
     def timeline():
-        return render_template(
-            'timeline.html', title="Timeline", menu_items=menu_items
-        )
+        return render_template("timeline.html", title="Timeline", menu_items=menu_items)
 
     @app.route("/api/timeline_post", methods=["POST"])
     def post_time_line_post():
@@ -173,7 +171,7 @@ def create_app():
             return "Invalid email", 400
         if not content:
             return "Invalid content", 400
-    
+
         timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
         return model_to_dict(timeline_post)
@@ -197,7 +195,8 @@ def create_app():
 
     return app
 
+
 if __name__ == "__main__":
     initialize_db()
     app = create_app()
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

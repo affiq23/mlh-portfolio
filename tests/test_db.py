@@ -6,7 +6,8 @@ from app import TimelinePost
 MODELS = [TimelinePost]
 
 # Use an in-memory SQLite DB
-test_db = SqliteDatabase(':memory:')
+test_db = SqliteDatabase(":memory:")
+
 
 class TestTimelinePost(unittest.TestCase):
     def setUp(self):
@@ -20,15 +21,11 @@ class TestTimelinePost(unittest.TestCase):
 
     def test_timeline_post(self):
         first_post = TimelinePost.create(
-            name='John Doe',
-            email='john@example.com',
-            content='Hello world, I\'m John!'
+            name="John Doe", email="john@example.com", content="Hello world, I'm John!"
         )
         assert first_post.id == 1
 
         second_post = TimelinePost.create(
-            name='Jane Doe',
-            email='jane@example.com',
-            content='Hello world, I\'m Jane!'
+            name="Jane Doe", email="jane@example.com", content="Hello world, I'm Jane!"
         )
         assert second_post.id == 2
