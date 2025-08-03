@@ -13,15 +13,17 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+
   myportfolio:
     build: .
     ports:
-      - "5001:5000"
+      - "80:5000"  # <-- Expose to port 80 externally
     environment: 
       FLASK_ENV: production
     depends_on:
       mysql:
         condition: service_healthy
     restart: unless-stopped
+
 volumes:
   mydatabase:
