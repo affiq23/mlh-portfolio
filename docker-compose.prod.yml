@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   mysql:
     image: mariadb:latest
@@ -25,20 +24,23 @@ services:
     restart: unless-stopped
 
   nginx:
-    container_name: nginx
     image: jonasal/nginx-certbot
+    container_name: nginx
     restart: always
     environment:
-      - CERTBOT_EMAIL=name@example.com 
+      CERTBOT_EMAIL: affiqem@gmail.com
+      CERTBOT_DOMAINS: affiq-site.duckdns.org 
     ports:
-      - 80:80
-      - 443:443
-    volumes: 
-      - nginx_secrets:/etc/letsencrypt
+      - "80:80"
+      - "443:443"
+    volumes:
+      - nginx_certs:/etc/letsencrypt
+      - nginx_html:/var/www/certbot
       - ./user_conf.d:/etc/nginx/user_conf.d
     depends_on:
       - myportfolio
 
 volumes:
   mydatabase:
-  nginx_secrets:
+  nginx_certs:
+  nginx_html:
