@@ -1,18 +1,28 @@
-version: '3.8'
 services:
   mysql:
     image: mariadb:latest
     environment:
       MYSQL_DATABASE: portfolio
       MYSQL_ROOT_PASSWORD: password
+    # Optimize MySQL for low-memory systems
+    command: >
+      --innodb-buffer-pool-size=128M
+      --max-connections=20
+      --innodb-log-file-size=32M
+      --innodb-flush-method=O_DIRECT
+      --query-cache-size=0
+      --query-cache-type=0
     volumes:
       - mydatabase:/var/lib/mysql
+    # Limit memory usage
+    mem_limit: 256m
+    memswap_limit: 512m
     healthcheck:
       test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
-      interval: 10s
-      timeout: 5s
+      interval: 15s
+      timeout: 10s
       retries: 5
-      start_period: 30s
+      start_period: 60s
 
   myportfolio:
     build: .
@@ -23,6 +33,9 @@ services:
       mysql:
         condition: service_healthy
     restart: unless-stopped
+    # Limit memory usage
+    mem_limit: 256m
+    memswap_limit: 512m
 
   nginx:
     container_name: nginx
@@ -33,11 +46,15 @@ services:
     ports:
       - 80:80
       - 443:443
-    volumes: 
+    volumes:
       - nginx_secrets:/etc/letsencrypt
       - ./user_conf.d:/etc/nginx/user_conf.d
     depends_on:
       - myportfolio
+    # Limit memory usage
+    mem_limit: 128m
+    memswap_limit: 256m
+
 volumes:
   mydatabase:
   nginx_secrets:
