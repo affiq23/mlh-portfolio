@@ -1,3 +1,4 @@
+version: '3.8'
 services:
   mysql:
     image: mariadb:latest
@@ -6,10 +7,6 @@ services:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - mydatabase:/var/lib/mysql
-
-    
-    mem_limit: 256m # limiting the ram usage
-    cpus: 0.5 #limit to half of a CPU core
     healthcheck:
       test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
       interval: 10s
@@ -36,13 +33,11 @@ services:
     ports:
       - 80:80
       - 443:443
-    volumes:
+    volumes: 
       - nginx_secrets:/etc/letsencrypt
       - ./user_conf.d:/etc/nginx/user_conf.d
-      - ./certbot/www:/var/www/certbot
     depends_on:
       - myportfolio
-
 volumes:
   mydatabase:
   nginx_secrets:
