@@ -43,6 +43,8 @@ def initialize_db():
 # Flask app factory
 def create_app():
     app = Flask(__name__)
+    with mydb:
+        mydb.create_tables([TimelinePost])
 
     experiences = [
         {
