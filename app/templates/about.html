@@ -1,36 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ title }}</title>
     <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles/main.css') }}"
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles/main.css') }}"
     />
-  </head>
-  <body>
+</head>
+<body>
     <header class="nav-bar">
-      <nav>
-        <ul class="nav-menu">
-          {% for name, endpoint in menu_items.items() %}
-          <li><a href="{{ url_for(endpoint) }}">{{ name }}</a></li>
-          {% endfor %}
-        </ul>
-      </nav>
+        <nav>
+            <ul class="nav-menu">
+                {% for name, endpoint in menu_items.items() %}
+                <li><a href="{{ url_for(endpoint) }}">{{ name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
     </header>
     <main>
-      <h2>{{ title }}</h2>
-      <div class="about-photo">
-        <img
-          src="{{ url_for('static', filename='img/me.png') }}"
-          alt="Photo of Affiq"
-          width="200"
-        />
-      </div>
-      <div class="content-box">
-        <p>{{ about_text }}</p>
-      </div>
+        <h2>{{ title }}</h2>
+        <div class="about-photo">
+            <img
+                src="{{ url_for('static', filename='img/me.png') }}"
+                alt="Photo of Affiq"
+                width="200"
+            />
+        </div>
+        <div class="content-box">
+            <p>{{ about_text }}</p>
+        </div>
+
+        <!-- Education Section -->
+        {% for edu in education %}
+        <div class="content-box">
+            <div class="education-header">
+                <img src="{{ url_for('static', filename=edu.image) }}" alt="{{ edu.school }} logo" class="edu-logo" />
+                <div class="education-info">
+                    <strong>{{ edu.school }}</strong>
+                    <div class="degree">{{ edu.degree }}</div>
+                    <div class="education-details">{{ edu.date }} · {{ edu.location }}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Skills Section -->
+        <div class="content-box">
+            {% for category, skill_list in skills.items() %}
+            <div class="skills-category">
+                <strong>{{ category }}</strong>
+                <div class="skills-list">
+                    {% for skill in skill_list %}
+                    <div class="skill-item">
+                        <span class="skill-icon">{{ skill.icon }}</span>
+                        <span class="skill-name">{{ skill.name }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </main>
-  </body>
+</body>
 </html>

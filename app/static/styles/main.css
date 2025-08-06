@@ -258,3 +258,140 @@ main p {
     font-size: 1.3rem;
   }
 }
+
+/* Add these styles to the end of your main.css file */
+
+/* Education Section Styles */
+.education-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.edu-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  border: 3px solid #1C539F;
+  box-shadow: 0 2px 8px rgba(28, 83, 159, 0.2);
+}
+
+.education-info strong {
+  font-size: 1.4rem;
+  color: #1C539F;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.degree {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.education-details {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 400;
+}
+
+/* Skills Section Styles */
+.skills-category {
+  margin-bottom: 30px;
+}
+
+.skills-category:last-child {
+  margin-bottom: 0;
+}
+
+.skills-category strong {
+  font-size: 1.3rem;
+  color: #1C539F;
+  display: block;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #1C539F;
+  padding-bottom: 8px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  cursor: default;
+  font-size: 0.95rem;
+}
+
+.skill-item:hover {
+  background: #1C539F;
+  border-color: #1C539F;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 83, 159, 0.3);
+}
+
+.skill-icon {
+  font-size: 1.1rem;
+  min-width: 18px;
+  text-align: center;
+}
+
+.skill-name {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .education-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .edu-logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .education-info strong {
+    font-size: 1.2rem;
+  }
+  
+  .skills-list {
+    justify-content: center;
+  }
+  
+  .skill-item {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .skill-item {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
+}

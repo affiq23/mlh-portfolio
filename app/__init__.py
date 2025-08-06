@@ -45,8 +45,18 @@ def create_app():
     app = Flask(__name__)
     with mydb:
         mydb.create_tables([TimelinePost])
-
     experiences = [
+        {
+            "title": "Software Developer Intern",
+            "company": "UTDesign Studio",
+            "location": "Richardson, TX",
+            "date": "June 2025 - Present",
+            "description": [
+                "Developed internal real-time event calendar application, enabling dynamic scheduling, event tracking, and live updates using Vue.js, Nuxt.js, and Prisma ORM",
+                "Built and maintained RESTful API endpoints with Node.js, Express, and Prisma, handling event CRUD operations, user sessions, and notifications",
+                "Implemented secure email verification system with token-based authentication for account security",
+            ],
+        },
         {
             "title": "Software Track Lead",
             "company": "Theta Tau",
@@ -59,11 +69,12 @@ def create_app():
         {
             "title": "Software Engineer Intern",
             "company": "Texas A&M Health Science Center",
-            "date": "May 2024 - September 2024",
+            "location": "College Station, TX",
+            "date": "May 2024 - August 2024",
             "description": [
-                "Worked on frontend and data-layer development building a user-focused digital portal to replace paper forms; reduced nurse data entry time by 70%",
-                "Engineered 50+ dynamic intake and assessment workflows in Next.js with reusable React components, collaborating with UI/UX designers to refine form layouts and streamline user flows",
-                "Implemented PostgreSQL data layer using Prisma ORM models, enabling efficient CRUD operations for robust patient record management.",
+                "Developed a digital intake portal with frontend forms and backend data layer integration, reducing manual data entry by up to 50%",
+                "Designed and developed 20+ dynamic intake and assessment workflows in Next.js with reusable React components, refining form layouts and streamlining user flows",
+                "Implemented PostgreSQL data layer using Prisma ORM models, enabling efficient CRUD operations for robust record management",
             ],
         },
         {
@@ -74,13 +85,81 @@ def create_app():
         },
     ]
 
+
+    projects = [
+        {
+            "title": "Expense Tracker",
+            "technologies": "React, Next.js, Tesseract.js, Multer (for file uploads)",
+            "description": [
+                "Built a full-stack expense tracker that lets users upload receipt images, automatically extracts totals and dates via OCR, and provides an organized, searchable history with category filters."
+            ],
+            "github": "https://github.com/affiq23/expense-tracker",
+        },
+        {
+            "title": "Kvault",
+            "technologies": "Next.js, Typescript, React, Supabase, Commander.js",
+            "description": [
+              "Version-controlled note-taking system with a unified command line and web interface for managing markdown notes with authentication and local snapshot tracking."
+            ],
+            "github": "https://github.com/affiq23/kvault",
+            "demo": "https://kvault.vercel.app/"
+        },
+        {
+            "title": "Stem4Stems",
+            "technologies": "React, Three.js, OpenAI API",
+            "description": [
+               "Developed a browser-based learning tool that uses engaging visuals and AI-powered quizzes to help younger students grasp STEM concepts through interactivity."
+            ],
+            "github": "https://github.com/affiq23/stem4stems",
+            "demo": "https://stem4stems.vercel.app/"
+        },
+        {
+            "title": "ML Classifier",
+            "technologies": "Python, Google Colab, numpys, scikit-learn",
+            "description": [
+             "Built reliable text classification models that handle a range of natural language processing tasks with ease and flexibility."
+            ],
+            "github": "https://github.com/affiq23/text_classification_project",
+        },
+    ]
+
     education = [
         {
             "school": "University of Texas at Dallas",
-            "degree": "B.S. in Computer Science",
+            "degree": "Bachelor of Science in Computer Science",
+            "date": "Expected Spring 2026",
+            "location": "Richardson, TX",
             "image": "img/utd.jpg",
         }
     ]
+
+    skills = {
+        "Programming Languages": [
+            {"name": "Java", "icon": "☕"},
+            {"name": "Swift", "icon": "🍎"},
+            {"name": "JavaScript", "icon": "📜"},
+            {"name": "TypeScript", "icon": "🔷"},
+            {"name": "Python", "icon": "🐍"},
+            {"name": "C++", "icon": "⚙️"},
+        ],
+        "Frameworks & Libraries": [
+            {"name": "React.js", "icon": "⚛️"},
+            {"name": "Next.js", "icon": "▲"},
+            {"name": "Tailwind", "icon": "💨"},
+            {"name": "Node.js", "icon": "🟢"},
+            {"name": "Flask", "icon": "🌶️"},
+            {"name": "Express", "icon": "🚄"},
+            {"name": "LangChain", "icon": "🔗"},
+        ],
+        "Tools & Technologies": [
+            {"name": "GitHub", "icon": "🐙"},
+            {"name": "MongoDB", "icon": "🍃"},
+            {"name": "Supabase", "icon": "⚡"},
+            {"name": "PostgreSQL", "icon": "🐘"},
+            {"name": "Docker", "icon": "🐳"},
+            {"name": "Prisma", "icon": "🔺"},
+        ],
+    }
 
     hobbies = [
         {
@@ -104,7 +183,7 @@ def create_app():
         "Home": "index",
         "About": "about",
         "Experience": "experience",
-        "Education": "education_view",
+        "Projects": "projects_view",
         "Hobbies": "hobbies_view",
         "Map": "map_view",
         "Timeline": "timeline",
@@ -119,11 +198,17 @@ def create_app():
     @app.route("/about")
     def about():
         about_text = (
-            "Hi, I'm Affiq, a CS student at the University of Texas at Dallas. "
-            "I enjoy coding, playing guitar, and exploring new places."
+            "Hi! I'm currently a junior studying computer science at UT Dallas. I've worked hands "
+            "on in the fields of web and mobile app development, and am currently exploring fields "
+            "such as artificial intelligence and cloud computing."
         )
         return render_template(
-            "about.html", title="About Me", about_text=about_text, menu_items=menu_items
+            "about.html",
+            title="About Me",
+            about_text=about_text,
+            education=education,
+            skills=skills,
+            menu_items=menu_items,
         )
 
     @app.route("/experience")
@@ -136,12 +221,12 @@ def create_app():
             menu_items=menu_items,
         )
 
-    @app.route("/education")
-    def education_view():
+    @app.route("/projects")
+    def projects_view():
         return render_template(
-            "education.html",
-            title="Education",
-            education=education,
+            "projects.html",
+            title="Projects",
+            projects=projects,
             menu_items=menu_items,
         )
 

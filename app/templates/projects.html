@@ -21,21 +21,34 @@
     </header>
     <main>
         <h2>{{ title }}</h2>
-        {% for job in experiences %}
+        {% for project in projects %}
         <div class="content-box">
             <p>
-                <strong>{{ job.title }}</strong> at {{ job.company }}
-                {% if job.location %}
-                <br><em>{{ job.location }}</em>
+                <strong>{{ project.title }}</strong>
+                {% if project.technologies %}
+                <br><em>Technologies: {{ project.technologies }}</em>
                 {% endif %}
-                <br><span class="date">{{ job.date }}</span>
             </p>
-            {% if job.description %}
+            {% if project.description %}
             <ul>
-                {% for point in job.description %}
+                {% for point in project.description %}
                 <li>{{ point }}</li>
                 {% endfor %}
             </ul>
+            {% endif %}
+            {% if project.github %}
+            <p>
+                <a href="{{ project.demo }}" target="_blank" rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+            </p>
+            {% endif %}
+            {% if project.demo %}
+            <p>
+                <a href="{{ project.demo }}" target="_blank" rel="noopener noreferrer">
+                    View Demo
+                </a>
+            </p>
             {% endif %}
         </div>
         {% endfor %}
