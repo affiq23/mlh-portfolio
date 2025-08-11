@@ -85,7 +85,6 @@ def create_app():
         },
     ]
 
-
     projects = [
         {
             "title": "Expense Tracker",
@@ -99,25 +98,25 @@ def create_app():
             "title": "Kvault",
             "technologies": "Next.js, Typescript, React, Supabase, Commander.js",
             "description": [
-              "Version-controlled note-taking system with a unified command line and web interface for managing markdown notes with authentication and local snapshot tracking."
+                "Version-controlled note-taking system with a unified command line and web interface for managing markdown notes with authentication and local snapshot tracking."
             ],
             "github": "https://github.com/affiq23/kvault",
-            "demo": "https://kvault.vercel.app/"
+            "demo": "https://kvault.vercel.app/",
         },
         {
             "title": "Stem4Stems",
             "technologies": "React, Three.js, OpenAI API",
             "description": [
-               "Developed a browser-based learning tool that uses engaging visuals and AI-powered quizzes to help younger students grasp STEM concepts through interactivity."
+                "Developed a browser-based learning tool that uses engaging visuals and AI-powered quizzes to help younger students grasp STEM concepts through interactivity."
             ],
             "github": "https://github.com/affiq23/stem4stems",
-            "demo": "https://stem4stems.vercel.app/"
+            "demo": "https://stem4stems.vercel.app/",
         },
         {
             "title": "ML Classifier",
             "technologies": "Python, Google Colab, numpys, scikit-learn",
             "description": [
-             "Built reliable text classification models that handle a range of natural language processing tasks with ease and flexibility."
+                "Built reliable text classification models that handle a range of natural language processing tasks with ease and flexibility."
             ],
             "github": "https://github.com/affiq23/text_classification_project",
         },
