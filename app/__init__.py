@@ -174,7 +174,7 @@ def create_app():
         {
             "name": "Space",
             "image": "img/space.jpg",
-            "description": "space",
+            "description": "I like space",
         },
     ]
 
