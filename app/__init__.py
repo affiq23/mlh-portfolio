@@ -165,17 +165,17 @@ def create_app():
         {
             "name": "Guitar",
             "image": "img/guitar.jpg",
-            "description": "I've been playing guitar for almost 5 years now, and I enjoy playing songs from bands like Blink 182, Arctic Monkeys, and The 1975. I play both acoustic and electric, but playing acoustic songs have recently become my new favorite!",
+            "description": "guitar",
         },
         {
             "name": "Drawing",
             "image": "img/drawing.jpg",
-            "description": "I like sketching out cartoons and comics as a way to pass the time. I also enjoy drawing nature and landscapes (although I'm not very good at it!)",
+            "description": "drawing",
         },
         {
             "name": "Space",
             "image": "img/space.jpg",
-            "description": "I've always been interested in space and learning about all the cool things in our universe we don't understand. I like watching videos and reading books on topics such as black holes, supernovas, and the possibility of alien life.",
+            "description": "space",
         },
     ]
 
