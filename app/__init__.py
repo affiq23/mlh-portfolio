@@ -164,18 +164,16 @@ def create_app():
         {
             "name": "Guitar",
             "image": "img/guitar.jpg",
-            "description": "guitar",
         },
         {
             "name": "Drawing",
             "image": "img/drawing.jpg",
-            "description": "I like drawing",
         },
         {
             "name": "Space",
             "image": "img/space.jpg",
-            "description": "I like space",
         },
+        {"name": "Working out", "image": "img/gym.jpg"},
     ]
 
     menu_items = {
